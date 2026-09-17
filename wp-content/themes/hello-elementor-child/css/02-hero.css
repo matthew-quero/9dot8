@@ -1,0 +1,366 @@
+/* =============================================================================
+   02-HERO — Section hero (haut de la home)
+   ============================================================================= */
+
+:root {
+  --sk-hero-nav-h: 80px;
+  --sk-hero-photo: url('/9dot8/wp-content/uploads/2026/04/skate-figure.jpg');
+}
+
+.sk-hero *,
+.sk-hero *::before,
+.sk-hero *::after {
+  box-sizing: border-box;
+}
+
+/* ---- BASE MOBILE-FIRST ---- */
+.sk-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+  height: calc(100svh - var(--sk-hero-nav-h));
+  min-height: calc(100svh - var(--sk-hero-nav-h));
+  max-height: calc(100svh - var(--sk-hero-nav-h));
+}
+
+.sk-hero__left {
+  background: var(--sk-green, #CBFF00);
+  color: var(--sk-black, #1C1C1C);
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.sk-hero__left::after {
+  content: '9';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: 28rem;
+  line-height: 1;
+  color: rgba(28,28,28,0.06);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.sk-hero__left::before { content: none; }
+
+.sk-hero__inner {
+  max-width: 32rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.25rem;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.sk-hero__title {
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-weight: 400;
+  font-size: clamp(4.5rem, 22vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: var(--sk-black, #1C1C1C);
+  margin: 0;
+  text-align: left;
+  display: inline-block;
+  align-self: center;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.sk-hero__line { display: block; }
+.sk-hero__line--1 { margin-left: -0.05em; }
+.sk-hero__line--2 { padding-left: 1.2rem; }
+.sk-hero__line--3 {
+  padding-left: 0.4rem;
+  position: relative;
+}
+.sk-hero__line--3::after {
+  content: '';
+  display: block;
+  width: 50%;
+  height: 6px;
+  background: var(--sk-black, #1C1C1C);
+  margin: 0.4rem 0 0;
+}
+
+.sk-hero__pitch {
+  font-family: var(--sk-font-body, 'Space Grotesk', sans-serif);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--sk-black, #1C1C1C);
+  max-width: 32ch;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sk-hero__cta {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.sk-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.2rem;
+  font-family: var(--sk-font-body, 'Space Grotesk', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+  border: 2px solid var(--sk-black, #1C1C1C);
+  white-space: nowrap;
+}
+
+.sk-hero__btn--primary {
+  background: var(--sk-black, #1C1C1C);
+  color: var(--sk-green, #CBFF00);
+}
+.sk-hero__btn--primary:hover {
+  background: transparent;
+  color: var(--sk-black, #1C1C1C);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--sk-black, #1C1C1C);
+}
+
+.sk-hero__btn--secondary {
+  background: transparent;
+  color: var(--sk-black, #1C1C1C);
+}
+.sk-hero__btn--secondary:hover {
+  background: var(--sk-black, #1C1C1C);
+  color: var(--sk-green, #CBFF00);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 rgba(28,28,28,0.3);
+}
+
+.sk-hero__arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.sk-hero__btn:hover .sk-hero__arrow { transform: translateX(4px); }
+
+.sk-hero__stats {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 1.25rem 0 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 1.5rem;
+  border-top: 2px solid rgba(28,28,28,0.25);
+  width: 100%;
+  max-width: 22rem;
+}
+
+.sk-hero__stat {
+  font-family: var(--sk-font-body, 'Space Grotesk', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sk-black, #1C1C1C);
+  text-align: center;
+}
+
+.sk-hero__stat strong {
+  display: block;
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: 1.85rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.sk-hero__right {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  background: var(--sk-black, #1C1C1C);
+}
+
+.sk-hero__photo {
+  position: absolute;
+  inset: 0;
+  background-image: var(--sk-hero-photo);
+  background-size: cover;
+  background-position: center 35%;
+  filter: grayscale(0.6) contrast(1.15);
+  transform: scale(1.03);
+  transition: transform 8s ease;
+}
+
+.sk-hero:hover .sk-hero__photo { transform: scale(1); }
+
+.sk-hero__photo-grain {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 2px,
+    rgba(0,0,0,0.06) 2px,
+    rgba(0,0,0,0.06) 3px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+/* ---- TABLETTE (≥768px) ---- */
+@media (min-width: 768px) {
+  .sk-hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .sk-hero__right { display: none; }
+  .sk-hero__left {
+    padding: 3rem 2rem;
+    justify-content: center;
+    text-align: left;
+    height: 100%;
+  }
+  .sk-hero__left::before,
+  .sk-hero__left::after { display: none; }
+  .sk-hero__inner {
+    max-width: 40rem;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .sk-hero__title {
+    font-size: clamp(3.5rem, 9vw, 5.5rem);
+    text-align: left;
+    align-self: flex-start;
+    margin-left: 0;
+    margin-right: auto;
+    padding-left: 0;
+  }
+  .sk-hero__line { display: block; text-align: left; margin-left: 0; }
+  .sk-hero__line--1,
+  .sk-hero__line--2,
+  .sk-hero__line--3 {
+    padding-left: 0;
+    margin-left: 0;
+  }
+  .sk-hero__line--3::after {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .sk-hero__pitch {
+    text-align: left;
+    margin: 0;
+    max-width: 34ch;
+  }
+  .sk-hero__cta {
+    justify-content: flex-start;
+    width: auto;
+  }
+  .sk-hero__stats {
+    justify-content: flex-start;
+    max-width: none;
+    margin-top: 0;
+  }
+  .sk-hero__stat { text-align: left; }
+}
+
+
+/* ---- DESKTOP (≥1024px) ---- */
+@media (min-width: 1024px) {
+  .sk-hero {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    min-height: min(calc(100svh - var(--sk-hero-nav-h)), 720px);
+    height: auto;
+    max-height: none;
+  }
+
+  .sk-hero__right { display: block; }
+
+  .sk-hero__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem 3rem;
+  }
+
+  .sk-hero__left::after {
+    content: '9';
+    display: block;
+    position: absolute;
+    bottom: -1rem;
+    right: -0.5rem;
+    font-family: var(--sk-font-title, 'Anton', sans-serif);
+    font-size: 11rem;
+    line-height: 1;
+    color: rgba(28,28,28,0.07);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .sk-hero__inner {
+    max-width: 32rem;
+    margin: 0 auto;
+    gap: 1.25rem;
+  }
+
+  .sk-hero__title { font-size: clamp(3.5rem, 6vw, 5.5rem); }
+  .sk-hero__line--2,
+  .sk-hero__line--3 { padding-left: 0; }
+
+  .sk-hero__pitch { font-size: clamp(0.95rem, 1.2vw, 1.05rem); }
+
+  .sk-hero__btn { padding: 0.85rem 1.6rem; }
+
+  .sk-hero__stats { padding-top: 0.85rem; gap: 1.5rem; }
+  .sk-hero__stat { font-size: 0.75rem; }
+  .sk-hero__stat strong { font-size: 1.85rem; }
+}
+
+
+/* ---- GRAND ÉCRAN (≥1440px) ---- */
+@media (min-width: 1440px) {
+  .sk-hero__inner {
+    max-width: 36rem;
+    gap: 1.5rem;
+  }
+  .sk-hero__title { font-size: clamp(4.5rem, 6.5vw, 6.5rem); }
+  .sk-hero__stat strong { font-size: 2rem; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-hero__photo {
+    transform: none;
+    transition: none;
+  }
+}

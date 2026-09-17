@@ -1,0 +1,199 @@
+/* =============================================================================
+   06-GALERIE — Galeries d'images Gutenberg dans les articles
+   =============================================================================
+   - Desktop : grille 3 colonnes plein largeur
+   - Mobile  : slider horizontal swipeable avec hint "← SWIPE ←"
+
+   Le wrapping des galeries est fait automatiquement par /inc/05-galerie-wrap.php
+   ============================================================================= */
+
+.sk-gallery-wrap {
+  margin: 4rem 0;
+  position: relative;
+}
+
+/* Override des variables WP qui contrôlent le gap */
+.sk-gallery-wrap .wp-block-gallery {
+  --wp--style--unstable-gallery-gap: 4px !important;
+  --gallery-block--gutter-size: 4px !important;
+  gap: 4px !important;
+}
+
+
+/* ---- DESKTOP : vraie grille CSS ---- */
+@media (min-width: 769px) {
+
+  .sk-gallery-wrap .wp-block-gallery {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px !important;
+    margin: 0 !important;
+    padding: 0;
+    width: 100%;
+  }
+
+  .sk-gallery-wrap .wp-block-gallery > .wp-block-image {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    margin: 0 !important;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--sk-gray-dark, #2A2A2A);
+    position: relative;
+  }
+
+  .sk-gallery-wrap .wp-block-gallery > .wp-block-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.15) contrast(1.05);
+    transition: filter 0.4s ease, transform 0.4s ease;
+  }
+
+  .sk-gallery-wrap .wp-block-gallery > .wp-block-image:hover img {
+    filter: grayscale(0) contrast(1.1);
+    transform: scale(1.02);
+  }
+
+  /* Débordement plein style mag */
+  .sk-gallery-wrap.sk-gallery--wide {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 0 2rem;
+  }
+  .sk-gallery-wrap.sk-gallery--wide .wp-block-gallery {
+    max-width: 1600px;
+    margin: 0 auto !important;
+  }
+}
+
+
+/* ---- MOBILE : slider horizontal swipeable ---- */
+@media (max-width: 768px) {
+
+  .sk-gallery-wrap {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 0;
+  }
+
+  .sk-gallery-wrap .wp-block-gallery {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px !important;
+    padding: 0 1.5rem 1rem;
+    margin: 0 !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sk-green, #CBFF00) transparent;
+  }
+
+  .sk-gallery-wrap .wp-block-gallery::-webkit-scrollbar { height: 3px; }
+  .sk-gallery-wrap .wp-block-gallery::-webkit-scrollbar-track { background: transparent; }
+  .sk-gallery-wrap .wp-block-gallery::-webkit-scrollbar-thumb { background: var(--sk-green, #CBFF00); }
+
+  .sk-gallery-wrap .wp-block-gallery > .wp-block-image {
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+    max-width: 85vw !important;
+    margin: 0 !important;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--sk-gray-dark, #2A2A2A);
+    scroll-snap-align: center;
+    position: relative;
+  }
+
+  .sk-gallery-wrap .wp-block-gallery > .wp-block-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.15) contrast(1.05);
+  }
+
+  /* Hint "swipe" sous le slider */
+  .sk-gallery-wrap::after {
+    content: '← SWIPE ←';
+    display: block;
+    text-align: center;
+    font-family: var(--sk-font-body, 'Space Grotesk'), sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--sk-gray, #A0A0A0);
+    margin-top: 0.5rem;
+    padding-bottom: 1rem;
+  }
+}
+
+
+/* ---- Légendes ---- */
+.sk-gallery-wrap .wp-block-gallery figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(to top, rgba(28,28,28,0.85), transparent);
+  color: var(--sk-white, #EDEDED);
+  font-family: var(--sk-font-body, 'Space Grotesk'), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
+}
+
+
+/* ---- Wrapping global des galeries (hors .sk-gallery-wrap) ---- */
+.sk-article-content .wp-block-gallery,
+.wp-block-gallery {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.5rem !important;
+  margin: 2.5rem 0 !important;
+  list-style: none;
+  padding: 0;
+}
+
+.wp-block-gallery .wp-block-image,
+.wp-block-gallery figure {
+  margin: 0 !important;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+.wp-block-gallery img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  filter: grayscale(0.15) contrast(1.05);
+  transition: filter 0.4s var(--sk-ease), transform 0.4s var(--sk-ease);
+}
+
+.wp-block-gallery figure:hover img {
+  filter: grayscale(0) contrast(1.1);
+  transform: scale(1.04);
+}
+
+.wp-block-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .wp-block-gallery {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

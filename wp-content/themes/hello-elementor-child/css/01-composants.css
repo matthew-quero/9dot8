@@ -1,0 +1,355 @@
+/* =============================================================================
+   01-COMPOSANTS — Boutons, stickers, cards, marquee, inputs, ligne event
+   =============================================================================
+   Composants réutilisables sur toutes les pages.
+   ============================================================================= */
+
+
+/* ---- BOUTONS ---- */
+.sk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  font-family: var(--sk-font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--sk-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.sk-btn--primary {
+  background: var(--sk-green);
+  color: var(--sk-black);
+  border-color: var(--sk-green);
+}
+.sk-btn--primary:hover {
+  background: transparent;
+  color: var(--sk-green);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--sk-green);
+}
+
+.sk-btn--secondary {
+  background: transparent;
+  color: var(--sk-white);
+  border-color: var(--sk-white);
+}
+.sk-btn--secondary:hover {
+  background: var(--sk-white);
+  color: var(--sk-black);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--sk-white);
+}
+
+.sk-btn--ghost {
+  background: transparent;
+  color: var(--sk-green);
+  border: 2px solid var(--sk-green);
+  padding: 0.7rem 1.5rem;
+}
+.sk-btn--ghost:hover {
+  background: var(--sk-green);
+  color: var(--sk-black);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--sk-green);
+}
+
+.sk-btn__arrow { transition: transform var(--sk-transition-fast); }
+.sk-btn:hover .sk-btn__arrow { transform: translateX(4px); }
+
+
+/* ---- STICKERS / BADGES ---- */
+.sk-sticker {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--sk-font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--sk-green);
+  color: var(--sk-black);
+  text-decoration: none;
+}
+
+.sk-sticker--rotate { transform: rotate(-3deg); }
+
+.sk-sticker--outline {
+  background: transparent;
+  color: var(--sk-green);
+  border: 2px solid var(--sk-green);
+}
+
+.sk-sticker--circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--sk-green);
+  color: var(--sk-black);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  transform: rotate(-8deg);
+  transition: transform 0.4s var(--sk-ease);
+}
+.sk-sticker--circle:hover { transform: rotate(-8deg) scale(1.05); }
+
+
+/* ---- CARDS GÉNÉRIQUES ---- */
+.sk-card {
+  background: var(--sk-gray-dark);
+  border: 1px solid #333;
+  overflow: hidden;
+  position: relative;
+  transition: var(--sk-transition);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.sk-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--sk-green);
+  color: inherit;
+}
+
+.sk-card__media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  position: relative;
+}
+.sk-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--sk-ease);
+  filter: grayscale(0.2) contrast(1.05);
+}
+.sk-card:hover .sk-card__media img {
+  transform: scale(1.05);
+  filter: grayscale(0) contrast(1.1);
+}
+
+.sk-card__category {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+}
+
+.sk-card__body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sk-card__meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.7rem;
+}
+
+.sk-card__title {
+  font-family: var(--sk-font-title);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  transition: color var(--sk-transition-fast);
+}
+.sk-card:hover .sk-card__title { color: var(--sk-green); }
+
+.sk-card__excerpt {
+  color: var(--sk-gray);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+
+/* ---- LIGNE ÉVÉNEMENT (utilisée dans archive-evenement et single-evenement) ---- */
+.sk-event {
+  display: grid;
+  grid-template-columns: 100px 1fr auto auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: var(--sk-gray-dark);
+  border-left: 4px solid var(--sk-green);
+  transition: var(--sk-transition);
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+.sk-event:hover {
+  background: #333;
+  transform: translateX(8px);
+  color: inherit;
+}
+
+.sk-event__date {
+  font-family: var(--sk-font-title);
+  text-align: center;
+  line-height: 1;
+}
+.sk-event__day {
+  font-size: 2.8rem;
+  color: var(--sk-white);
+  display: block;
+}
+.sk-event__month {
+  font-size: 1rem;
+  color: var(--sk-green);
+  letter-spacing: 0.1em;
+  display: block;
+}
+
+.sk-event__title {
+  font-family: var(--sk-font-title);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  color: var(--sk-white);
+  line-height: 1;
+}
+
+.sk-event__type {
+  color: var(--sk-green);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.sk-event__location {
+  color: var(--sk-gray);
+  font-size: 0.9rem;
+}
+
+.sk-event__time {
+  color: var(--sk-green);
+  font-family: var(--sk-font-title);
+  font-size: 1.5rem;
+}
+
+.sk-event__cta { white-space: nowrap; }
+
+/* Couleurs de liseré par type d'événement */
+.sk-event--competition { border-left-color: #FF3B3B; }
+.sk-event--stage       { border-left-color: #3B9DFF; }
+.sk-event--reunion     { border-left-color: var(--sk-gray); }
+
+
+/* ---- MARQUEE (texte défilant) ---- */
+.sk-marquee {
+  background: var(--sk-green);
+  color: var(--sk-black);
+  padding: 1rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid var(--sk-black);
+  border-bottom: 2px solid var(--sk-black);
+}
+
+.sk-marquee__track {
+  display: inline-block;
+  animation: sk-marquee 25s linear infinite;
+  font-family: var(--sk-font-title);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sk-marquee__track span { margin: 0 2rem; }
+.sk-marquee__star { color: var(--sk-black); }
+
+@keyframes sk-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+/* ---- FORMULAIRES ---- */
+.sk-input {
+  background: transparent;
+  border: 2px solid var(--sk-gray-dark);
+  color: var(--sk-white);
+  padding: 0.9rem 1.2rem;
+  font-family: var(--sk-font-body);
+  font-size: 1rem;
+  width: 100%;
+  transition: var(--sk-transition);
+}
+.sk-input:focus {
+  outline: none;
+  border-color: var(--sk-green);
+}
+.sk-input::placeholder { color: var(--sk-gray); }
+
+
+/* ---- ANIMATIONS UTILITAIRES ---- */
+@keyframes sk-fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sk-reveal {
+  animation: sk-fadeUp 0.8s var(--sk-ease) both;
+}
+
+.sk-glitch {
+  position: relative;
+  display: inline-block;
+}
+.sk-glitch:hover::before,
+.sk-glitch:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.sk-glitch:hover::before {
+  color: var(--sk-green);
+  transform: translate(-3px, 0);
+  mix-blend-mode: screen;
+}
+.sk-glitch:hover::after {
+  color: #ff00ea;
+  transform: translate(3px, 0);
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+
+/* ---- RESPONSIVE COMPOSANTS ---- */
+@media (max-width: 768px) {
+  .sk-event {
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+  }
+  .sk-event__time, .sk-event__cta, .sk-event .sk-btn {
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+    text-align: left;
+    justify-self: start;
+  }
+}

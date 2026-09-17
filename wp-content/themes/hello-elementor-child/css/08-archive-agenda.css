@@ -1,0 +1,87 @@
+/* =============================================================================
+   08-ARCHIVE-AGENDA — Page /agenda/ (liste des événements à venir)
+   ============================================================================= */
+
+.sk-archive-agenda__hero {
+  padding: 8rem 0 4rem;
+  border-bottom: 1px solid var(--sk-gray-dark);
+}
+
+.sk-archive-agenda__title {
+  font-family: var(--sk-font-title);
+  font-size: clamp(4rem, 12vw, 10rem);
+  text-transform: uppercase;
+  line-height: 0.9;
+  margin: 1rem 0 2rem;
+}
+
+.sk-archive-agenda__intro {
+  max-width: 600px;
+  font-size: 1.15rem;
+  color: var(--sk-gray);
+}
+
+
+/* ---- Liste ---- */
+.sk-archive-agenda__list {
+  padding: 4rem 0 6rem;
+}
+
+
+/* ---- Pagination ---- */
+.sk-archive-agenda__pagination {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.sk-archive-agenda__pagination .page-numbers {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  margin: 0 0.25rem;
+  border: 2px solid var(--sk-gray-dark);
+  color: var(--sk-white);
+  text-decoration: none;
+  font-family: var(--sk-font-body);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: var(--sk-transition);
+}
+
+.sk-archive-agenda__pagination .page-numbers:hover,
+.sk-archive-agenda__pagination .page-numbers.current {
+  background: var(--sk-green);
+  color: var(--sk-black);
+  border-color: var(--sk-green);
+}
+
+
+/* ---- État vide ---- */
+.sk-archive-agenda__empty {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.sk-archive-agenda__empty h2 { margin-bottom: 1rem; }
+.sk-archive-agenda__empty p {
+  color: var(--sk-gray);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+
+/* === AGENDA : sessions récurrentes + calendrier (ajout) === */
+.sk-recur{padding:70px 0 10px;}
+.sk-recur__title,.sk-cal-wrap__title,.sk-list__title{font-family:Anton,Impact,sans-serif;font-size:clamp(28px,3.6vw,54px);text-transform:uppercase;color:#fff;margin:0 0 30px;line-height:1;}
+.sk-recur__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.sk-recur__card{display:flex;flex-direction:column;gap:8px;background:#141414;border:1px solid #262626;padding:28px 26px;transition:border-color .3s ease,transform .3s ease;}
+.sk-recur__card:hover{border-color:#c8ff00;transform:translateY(-4px);}
+.sk-recur__day{font-family:Anton,Impact,sans-serif;font-size:clamp(20px,2vw,30px);text-transform:uppercase;color:#c8ff00;line-height:1;}
+.sk-recur__what{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.5px;color:#fff;}
+.sk-recur__where{font-family:'Space Grotesk',sans-serif;font-size:14px;color:#9a9a9a;line-height:1.4;}
+.sk-cal-wrap{padding:60px 0;}
+.sk-list__title{margin-top:10px;}
+/* masquer le footer par defaut du theme (doublon avec le footer global) */
+.post-type-archive-evenement .copyright,.single-evenement .copyright{display:none!important;}
+@media(max-width:820px){.sk-recur__grid{grid-template-columns:1fr;}}

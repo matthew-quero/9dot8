@@ -1,0 +1,109 @@
+/* =============================================================================
+   09-SINGLE-EVENEMENT — Page d'un événement (single-evenement.php)
+   ============================================================================= */
+
+.sk-event-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--sk-black-deep);
+  padding: 6rem 0 5rem;
+}
+
+.sk-event-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(28,28,28,0.3) 0%, rgba(28,28,28,0.95) 100%);
+}
+
+.sk-event-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.sk-event-hero__breadcrumb {
+  margin-bottom: 2rem;
+}
+
+.sk-event-hero__breadcrumb a {
+  color: var(--sk-gray);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sk-event-hero__breadcrumb a:hover { color: var(--sk-green); }
+
+.sk-event-hero__type {
+  margin-bottom: 1.5rem;
+}
+
+.sk-event-hero__title {
+  font-family: var(--sk-font-title);
+  font-size: clamp(3rem, 9vw, 8rem);
+  text-transform: uppercase;
+  line-height: 0.9;
+  margin-bottom: 2.5rem;
+  max-width: 1100px;
+}
+
+
+/* ---- Bloc infos clés ---- */
+.sk-event-hero__keyinfo {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 2rem;
+  background: var(--sk-black-deep);
+  border-left: 4px solid var(--sk-green);
+  margin-bottom: 2rem;
+  max-width: fit-content;
+}
+
+.sk-event-hero__keyinfo-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sk-event-hero__keyinfo-item strong {
+  font-family: var(--sk-font-title);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.sk-event-hero__cta {
+  margin-top: 1rem;
+}
+
+
+/* ---- Corps de l'événement ---- */
+.sk-event-body {
+  padding: 5rem 0;
+}
+
+
+/* ---- Événements liés ---- */
+.sk-event-related {
+  padding: 5rem 0;
+  background: var(--sk-black-deep);
+}
+
+.sk-event-related__title {
+  margin-bottom: 3rem;
+}
+
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  .sk-event-hero__keyinfo {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+}

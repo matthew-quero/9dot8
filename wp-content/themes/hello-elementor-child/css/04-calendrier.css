@@ -1,0 +1,381 @@
+/* =============================================================================
+   04-CALENDRIER — Calendrier mois interactif (desktop + mobile)
+   =============================================================================
+   Section affichée par le shortcode [sk_calendrier_mois].
+
+   - Desktop : grille 7 colonnes avec noms des événements visibles
+   - Mobile  : grille 7 colonnes compacte avec pastilles + zone détails au tap
+   ============================================================================= */
+
+.sk-calendrier {
+  background: var(--sk-black, #1C1C1C);
+  color: var(--sk-white, #EDEDED);
+  padding: clamp(3rem, 8vw, 7rem) 0;
+  font-family: var(--sk-font-body, 'Space Grotesk', sans-serif);
+  position: relative;
+}
+
+
+/* ---- En-tête + navigation mois ---- */
+.sk-calendrier__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #2A2A2A;
+}
+
+.sk-calendrier__title {
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: clamp(2.2rem, 6vw, 5rem);
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  margin-top: 0.5rem;
+}
+.sk-calendrier__title .sk-highlight { color: var(--sk-green, #CBFF00); }
+
+.sk-calendrier__nav {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sk-calendrier__nav-btn,
+.sk-calendrier__nav-today {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--sk-white, #EDEDED);
+  color: var(--sk-white, #EDEDED);
+  background: transparent;
+  transition: 0.25s cubic-bezier(0.77, 0, 0.175, 1);
+  cursor: pointer;
+}
+
+.sk-calendrier__nav-btn { width: 56px; height: 56px; font-size: 1.4rem; }
+.sk-calendrier__nav-today { padding: 0 1.2rem; height: 56px; font-size: 0.9rem; letter-spacing: 0.08em; }
+
+.sk-calendrier__nav-btn:hover,
+.sk-calendrier__nav-today:hover {
+  background: var(--sk-green, #CBFF00);
+  color: var(--sk-black, #1C1C1C);
+  border-color: var(--sk-green, #CBFF00);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--sk-green, #CBFF00);
+}
+
+
+/* ---- Grille mois ---- */
+.sk-calendrier__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  background: #2A2A2A;
+  border: 1px solid #2A2A2A;
+}
+
+.sk-calendrier__dayhead {
+  background: var(--sk-black, #1C1C1C);
+  color: var(--sk-green, #CBFF00);
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.9rem 0.4rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  border-bottom: 3px solid var(--sk-green, #CBFF00);
+}
+.sk-calendrier__dayhead-short { display: none; }
+.sk-calendrier__dayhead-full  { display: inline; }
+
+
+.sk-calendrier__cell {
+  background: #181818;
+  min-height: 130px;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  position: relative;
+  transition: background 0.25s ease;
+}
+
+.sk-calendrier__cell--empty {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #1a1a1a, #1a1a1a 8px,
+    #141414 8px, #141414 16px
+  );
+  opacity: 0.45;
+}
+
+.sk-calendrier__cell.has-events { cursor: pointer; }
+.sk-calendrier__cell.has-events:hover { background: #1f1f1f; }
+.sk-calendrier__cell.has-events:focus-visible {
+  outline: 2px solid var(--sk-green, #CBFF00);
+  outline-offset: -2px;
+}
+
+.sk-calendrier__cell.is-today {
+  background: #1f1f1f;
+  outline: 2px solid var(--sk-green, #CBFF00);
+  outline-offset: -2px;
+}
+
+.sk-calendrier__cell.is-selected { background: #2a2a2a; }
+
+.sk-calendrier__daynum {
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: 1.4rem;
+  color: var(--sk-white, #EDEDED);
+  line-height: 1;
+}
+.sk-calendrier__cell.is-today .sk-calendrier__daynum { color: var(--sk-green, #CBFF00); }
+
+
+/* ---- Liste d'événements (DESKTOP : noms visibles) ---- */
+.sk-calendrier__events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.sk-calendrier__event {
+  display: block;
+  text-decoration: none;
+  background: #2A2A2A;
+  border-left: 3px solid var(--sk-green, #CBFF00);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.72rem;
+  line-height: 1.25;
+  color: var(--sk-white, #EDEDED);
+  transition: 0.2s cubic-bezier(0.77, 0, 0.175, 1);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sk-calendrier__event:hover {
+  background: var(--sk-green, #CBFF00);
+  color: var(--sk-black, #1C1C1C);
+  transform: translateX(2px);
+}
+
+.sk-calendrier__event-time {
+  display: block;
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: var(--sk-green, #CBFF00);
+  letter-spacing: 0.04em;
+}
+.sk-calendrier__event:hover .sk-calendrier__event-time { color: var(--sk-black, #1C1C1C); }
+
+.sk-calendrier__event-title {
+  display: block;
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sk-calendrier__event.is-recurrent {
+  border-left-style: dashed;
+  background: #232323;
+}
+
+
+/* ---- Pastilles MOBILE (cachées sur desktop) ---- */
+.sk-calendrier__dots {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.sk-calendrier__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sk-green, #CBFF00);
+  display: inline-block;
+}
+.sk-calendrier__dot.is-recurrent {
+  background: transparent;
+  border: 1.5px solid var(--sk-green, #CBFF00);
+}
+
+.sk-calendrier__dot-more {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--sk-green, #CBFF00);
+  margin-left: 2px;
+}
+
+
+/* ---- Zone détails (visible mobile au tap) ---- */
+.sk-calendrier__details {
+  display: none;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #181818;
+  border-left: 3px solid var(--sk-green, #CBFF00);
+  animation: skCalSlideIn 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@keyframes skCalSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sk-calendrier__details-hint {
+  text-align: center;
+  padding: 1rem 0;
+  margin: 0;
+}
+
+.sk-calendrier__details-head {
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2A2A2A;
+}
+
+.sk-calendrier__details-head h3 {
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 0.3rem;
+  color: var(--sk-white, #EDEDED);
+}
+.sk-calendrier__details-head h3 span { color: var(--sk-green, #CBFF00); }
+
+.sk-calendrier__details-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sk-calendrier__details-event {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  text-decoration: none;
+  background: #1f1f1f;
+  border-left: 3px solid var(--sk-green, #CBFF00);
+  padding: 0.9rem 1rem;
+  color: var(--sk-white, #EDEDED);
+  transition: 0.25s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.sk-calendrier__details-event:hover,
+.sk-calendrier__details-event:active {
+  background: #2a2a2a;
+  transform: translateX(4px);
+}
+
+.sk-calendrier__details-event.is-recurrent { border-left-style: dashed; }
+
+.sk-calendrier__details-time {
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: 1.3rem;
+  color: var(--sk-green, #CBFF00);
+  min-width: 60px;
+}
+
+.sk-calendrier__details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sk-calendrier__details-info strong {
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.sk-calendrier__details-loc {
+  font-size: 0.8rem;
+  color: var(--sk-gray, #A0A0A0);
+  margin-top: 0.2rem;
+}
+
+.sk-calendrier__details-arrow {
+  font-family: var(--sk-font-title, 'Anton', sans-serif);
+  font-size: 1.4rem;
+  color: var(--sk-green, #CBFF00);
+}
+
+
+.sk-calendrier__empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--sk-gray, #A0A0A0);
+  font-size: 1.05rem;
+}
+
+
+/* ---- RESPONSIVE : la grille reste visible, on compacte ---- */
+@media (max-width: 900px) {
+  .sk-calendrier__header { flex-direction: column; align-items: flex-start; }
+  .sk-calendrier__nav { width: 100%; justify-content: space-between; }
+
+  .sk-calendrier__cell { min-height: 70px; padding: 0.4rem; gap: 0.2rem; }
+  .sk-calendrier__daynum { font-size: 1.05rem; }
+
+  .sk-calendrier__events { display: none; }
+  .sk-calendrier__cell.has-events .sk-calendrier__dots { display: flex; }
+
+  .sk-calendrier__dayhead-short { display: inline; }
+  .sk-calendrier__dayhead-full  { display: none; }
+  .sk-calendrier__dayhead { font-size: 0.85rem; padding: 0.6rem 0.2rem; letter-spacing: 0.05em; }
+
+  .sk-calendrier__details { display: block; }
+}
+
+@media (max-width: 480px) {
+  .sk-calendrier__cell { min-height: 56px; padding: 0.35rem 0.25rem; }
+  .sk-calendrier__daynum { font-size: 0.95rem; }
+  .sk-calendrier__dot { width: 6px; height: 6px; }
+  .sk-calendrier__dayhead { font-size: 0.75rem; padding: 0.5rem 0.1rem; }
+
+  .sk-calendrier__nav-btn { width: 48px; height: 48px; }
+  .sk-calendrier__nav-today { height: 48px; padding: 0 0.9rem; font-size: 0.8rem; }
+
+  .sk-calendrier__details { padding: 1.2rem; }
+  .sk-calendrier__details-head h3 { font-size: 2rem; }
+  .sk-calendrier__details-event { padding: 0.7rem 0.8rem; gap: 0.7rem; }
+  .sk-calendrier__details-time { font-size: 1.1rem; min-width: 50px; }
+  .sk-calendrier__details-info strong { font-size: 0.95rem; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-calendrier *,
+  .sk-calendrier *::before,
+  .sk-calendrier *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

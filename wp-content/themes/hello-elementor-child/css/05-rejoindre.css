@@ -1,0 +1,159 @@
+/* =============================================================================
+   05-REJOINDRE — Section adhésion / appel à rejoindre
+   =============================================================================
+   Le SEUL endroit du site où on utilise un fond vert plein largeur.
+   ============================================================================= */
+
+.sk-section--join {
+  position: relative;
+  background-color: var(--sk-green);
+  padding: var(--sk-space-xl) 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ---- Mot "REJOINDRE" géant en arrière-plan ---- */
+.sk-section--join .sk-join__bigword {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--sk-font-title);
+  font-size: clamp(10rem, 25vw, 30rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(28, 28, 28, 0.08);
+  z-index: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+
+/* ---- Conteneur principal ---- */
+.sk-section--join .sk-join {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: var(--sk-container);
+  width: 100%;
+  padding: 0 var(--sk-container-padding, 1.5rem);
+  gap: var(--sk-space-lg);
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.sk-section--join .sk-join__content {
+  flex: 1 1 500px;
+}
+
+
+/* ---- Titre & lead (forcés en NOIR pour écraser le CSS global) ---- */
+.sk-section--join .sk-join__title {
+  font-family: var(--sk-font-title);
+  font-size: clamp(4rem, 8vw, 7.5rem);
+  color: var(--sk-black) !important;
+  text-transform: uppercase;
+  line-height: 0.85;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: -0.01em;
+}
+
+.sk-section--join .sk-join__lead {
+  font-family: var(--sk-font-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0;
+  color: var(--sk-black) !important;
+  font-weight: 600;
+}
+
+
+/* ---- Colonne droite : prix + bouton ---- */
+.sk-section--join .sk-join__aside {
+  flex: 0 1 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.sk-section--join .sk-join__price {
+  background-color: var(--sk-black);
+  color: var(--sk-white);
+  padding: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.sk-section--join .sk-join__price-label {
+  font-family: var(--sk-font-body);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sk-gray);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.sk-section--join .sk-join__price-amount {
+  font-family: var(--sk-font-title);
+  font-size: 5rem;
+  color: var(--sk-green);
+  line-height: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.sk-section--join .sk-join__price-note {
+  font-family: var(--sk-font-body);
+  font-size: 0.85rem;
+  color: var(--sk-gray);
+}
+
+
+/* ---- CTA ---- */
+.sk-section--join .sk-join__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: var(--sk-black);
+  color: var(--sk-green);
+  text-decoration: none;
+  padding: 1.5rem 2rem;
+  font-family: var(--sk-font-body);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  transition: var(--sk-transition);
+  border: 2px solid var(--sk-black);
+}
+
+.sk-section--join .sk-join__cta:hover {
+  background-color: transparent;
+  color: var(--sk-black);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--sk-black);
+}
+
+.sk-section--join .sk-join__cta .sk-btn__arrow {
+  transition: transform var(--sk-transition-fast);
+}
+
+.sk-section--join .sk-join__cta:hover .sk-btn__arrow {
+  transform: translateX(6px);
+}
+
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  .sk-section--join .sk-join { gap: 3rem; }
+  .sk-section--join .sk-join__bigword { font-size: 35vw; }
+  .sk-section--join { padding: var(--sk-space-lg) 0; }
+  .sk-section--join .sk-join__price { padding: 2rem; }
+}

@@ -1,0 +1,239 @@
+/* =============================================================================
+   03-PULSE — Section "Le Pulse" / Actus
+   =============================================================================
+   Bloc des dernières actus avec en-tête + grille de cards.
+   Sur mobile : devient un slider horizontal scroll-snap.
+   ============================================================================= */
+
+.sk-section--pulse {
+  background: var(--sk-black);
+  padding: var(--sk-space-xl) 0;
+}
+
+
+/* ---- En-tête de section ---- */
+.sk-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--sk-gray-dark);
+}
+
+.sk-section-head__title {
+  font-family: var(--sk-font-title);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--sk-white);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.sk-section-head__slash {
+  color: var(--sk-gray);
+  margin: 0 0.2em;
+}
+
+.sk-section-head__title .sk-highlight {
+  color: var(--sk-green);
+}
+
+.sk-section-head__link {
+  font-family: var(--sk-font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sk-white);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid transparent;
+  transition: color var(--sk-transition-fast),
+              border-color var(--sk-transition-fast);
+}
+
+.sk-section-head__link:hover {
+  color: var(--sk-green);
+  border-bottom-color: var(--sk-green);
+}
+
+.sk-section-head__arrow {
+  display: inline-block;
+  transition: transform var(--sk-transition-fast);
+}
+
+.sk-section-head__link:hover .sk-section-head__arrow {
+  transform: translateX(4px);
+}
+
+
+/* ---- Grille pulse ---- */
+.sk-pulse__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+
+/* ---- Variantes pulse de la card (override sur .sk-card global) ---- */
+.sk-section--pulse .sk-card {
+  background: var(--sk-gray-dark);
+  border: 1px solid #2A2A2A;
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--sk-transition),
+              border-color var(--sk-transition);
+}
+
+.sk-section--pulse .sk-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--sk-green);
+}
+
+.sk-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+}
+
+.sk-section--pulse .sk-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--sk-black-deep);
+  overflow: hidden;
+  filter: grayscale(0.15) contrast(1.05);
+  transition: filter 0.5s var(--sk-ease),
+              transform 0.5s var(--sk-ease);
+}
+
+.sk-section--pulse .sk-card:hover .sk-card__media {
+  filter: grayscale(0) contrast(1.1);
+  transform: scale(1.03);
+}
+
+.sk-card__cat {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  background: var(--sk-green);
+  color: var(--sk-black);
+  font-family: var(--sk-font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  z-index: 2;
+  transform: rotate(-2deg);
+  transition: transform var(--sk-transition);
+}
+
+.sk-card:hover .sk-card__cat {
+  transform: rotate(-2deg) scale(1.05);
+}
+
+.sk-section--pulse .sk-card__body { padding: 1.5rem; }
+
+.sk-section--pulse .sk-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+  font-family: var(--sk-font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sk-gray);
+}
+
+.sk-card__sep { color: var(--sk-green); }
+
+.sk-section--pulse .sk-card__title {
+  font-family: var(--sk-font-title);
+  font-size: 1.5rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--sk-white);
+  margin: 0 0 0.6rem 0;
+  letter-spacing: 0;
+  transition: color var(--sk-transition-fast);
+}
+
+.sk-section--pulse .sk-card:hover .sk-card__title { color: var(--sk-green); }
+
+.sk-section--pulse .sk-card__excerpt {
+  font-family: var(--sk-font-body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--sk-gray);
+  margin: 0;
+}
+
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .sk-pulse__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sk-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .sk-section-head__link { font-size: 0.8rem; }
+
+  /* La grille devient un rail horizontal scrollable */
+  .sk-pulse__grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--sk-container-padding);
+    -webkit-overflow-scrolling: touch;
+    margin: 0 calc(var(--sk-container-padding) * -1);
+    padding: 0.5rem var(--sk-container-padding) 1.5rem;
+    scrollbar-width: none;
+  }
+  .sk-pulse__grid::-webkit-scrollbar { display: none; }
+
+  .sk-pulse__grid .sk-card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .sk-section--pulse .sk-card:hover { transform: none; }
+  .sk-section--pulse .sk-card:hover .sk-card__media { transform: none; }
+
+  .sk-section--pulse .sk-card__title { font-size: 1.3rem; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-section--pulse .sk-card,
+  .sk-section--pulse .sk-card__media,
+  .sk-card__cat,
+  .sk-section-head__arrow {
+    transition: none !important;
+    transform: none !important;
+  }
+}

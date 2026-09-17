@@ -1,0 +1,30 @@
+/*
+Theme Name: Hello Elementor Child
+Theme URI: https://elementor.com/hello-theme/
+Template: hello-elementor
+Author: 9dot8 Roller
+Description: Thème enfant 9dot8 — CSS découpé dans /css/, PHP découpé dans /inc/, chargés automatiquement par functions.php.
+Version: 2.0
+Tags: 9dot8, roller, skate
+*/
+
+/* =============================================================================
+   ⚠️  NE PAS METTRE DE CSS DANS CE FICHIER  ⚠️
+   =============================================================================
+   Tout le CSS est dans le dossier /css/ (un fichier par section).
+   Pour modifier un style, ouvre le bon fichier dans /css/ :
+
+     - Variables, fond, grain, typo de base   →  /css/00-base.css
+     - Boutons, stickers, cards génériques    →  /css/01-composants.css
+     - Section Hero (haut de la home)         →  /css/02-hero.css
+     - Section Pulse (actus)                  →  /css/03-pulse.css
+     - Calendrier interactif                  →  /css/04-calendrier.css
+     - Section Rejoindre (adhésion)           →  /css/05-rejoindre.css
+     - Galeries d'images dans articles        →  /css/06-galerie.css
+     - Page d'un article                      →  /css/07-single-article.css
+     - Page liste agenda                      →  /css/08-archive-agenda.css
+     - Page d'un événement                    →  /css/09-single-evenement.css
+
+   Pour ajouter un nouveau bloc : crée un fichier dans /css/ avec un préfixe
+   numérique supérieur (ex: 10-mon-bloc.css). Il sera chargé automatiquement.
+   ============================================================================= */
